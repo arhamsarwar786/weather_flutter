@@ -23,14 +23,21 @@ class ApiManager {
 
   static getWeatherByCity(city) async {
     var url = "$BaseWeatherURL?q=$city&appid=$ApiKey";
-
     try {
       var response = await http.get(Uri.parse(url));
       var responseData = jsonDecode(response.body);
-
       return responseData;
-      
+    } catch (e) {
+      print(e);
+    }
+  }
 
+    static getWeatherByLatLong(lat,long) async {
+    var url = "$BaseWeatherURL?lat=$lat&lon=$long&appid=$ApiKey";
+    try {
+      var response = await http.get(Uri.parse(url));
+      var responseData = jsonDecode(response.body);
+      return responseData;
     } catch (e) {
       print(e);
     }
